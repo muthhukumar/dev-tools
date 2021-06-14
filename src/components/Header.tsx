@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { Text, Flex, IconButton } from '@chakra-ui/react'
 import { FaTwitter } from 'react-icons/fa'
-import { BsBoxArrowInLeft } from 'react-icons/bs'
-import { useRouter } from 'next/dist/client/router'
+import { IoIosArrowRoundBack } from 'react-icons/io'
+import { useRouter } from 'next/router'
+
+import { Wrapper } from './Wrapper'
 
 export const Header = () => {
   const router = useRouter()
@@ -12,28 +14,31 @@ export const Header = () => {
   const isUtilityPath = pathname.includes('/utility')
 
   return (
-    <Flex
+    <Wrapper
+      display="flex"
+      flexDir="row"
       alignItems="center"
-      py="8"
       justifyContent="space-between"
-      maxW="container.lg"
       mx="auto"
-      px={[12, 6, 0, 0]}
+      mt="8"
+      mb="14"
+      pt="4"
+      pb="4"
     >
       <IconButton
         variant="ghost"
         aria-label="Search database"
-        icon={<BsBoxArrowInLeft size={22} />}
+        icon={<IoIosArrowRoundBack size={30} />}
         visibility={isUtilityPath ? 'visible' : 'hidden'}
         rounded="full"
         onClick={() => router.back()}
       />
-      <Text fontSize="2xl" fontWeight="bold" alignSelf="center">
+      <Text fontSize="xl" fontWeight="semibold" alignSelf="center">
         Dev Utils
       </Text>
       <Flex justifySelf="flex-end">
         <FaTwitter />
       </Flex>
-    </Flex>
+    </Wrapper>
   )
 }

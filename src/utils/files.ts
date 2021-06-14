@@ -1,10 +1,11 @@
 import fs from 'fs'
 import { join } from 'path'
 import { v4 as uuidv4 } from 'uuid'
+import type { Utility } from './types/utilitiy'
 
 const utilityDirectory = join(process.cwd(), 'src/pages/utility')
 
-export function getUtilitySlugs() {
+export function getUtilitySlugs(): Array<Utility> {
   const files = fs.readdirSync(utilityDirectory)
   return files.map((file) => {
     const slug = file.replace(/\.tsx$/, '')

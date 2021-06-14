@@ -18,7 +18,6 @@ export const Footer = () => {
       borderTopColor="grey"
       mt="auto"
       py="8"
-      px="0"
     >
       <Flex alignItems="center" justifyContent="space-between">
         <Flex alignItems="center">
