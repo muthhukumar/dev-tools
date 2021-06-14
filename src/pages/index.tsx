@@ -5,10 +5,19 @@ import { FiSearch } from 'react-icons/fi'
 
 import { Page } from '../components/Page'
 import { getUtilitySlugs } from '../utils/files'
+import { useSearch } from '../utils/hooks/useSearch'
 
-const badgeColors = ['alert', 'violet', 'cyan', 'secondary']
+import type { Utility } from '../utils/types/utilitiy'
+
+const badgeColors = ['alert', 'violet', 'cyan']
 
 const Index = ({ topUtilities = [] }) => {
+  const {
+    searchTerm,
+    setSearchTerm,
+    result: filteredTopUtilities,
+  } = useSearch<Utility>(topUtilities, 'slug')
+
   return (
     <Page>
       <Container maxW="container.md">
@@ -19,7 +28,9 @@ const Index = ({ topUtilities = [] }) => {
           <Text textAlign="center" mt="2">
             Hey! I'm{' '}
             <Link href="https://nullish.in">
-              <chakra.strong>@muthu</chakra.strong>
+              <a>
+                <chakra.strong>@muthu</chakra.strong>
+              </a>
             </Link>{' '}
             and this is the list of dev utilities I have created.
           </Text>
@@ -39,12 +50,21 @@ const Index = ({ topUtilities = [] }) => {
           <Text mx="2" fontSize="2xl">
             /
           </Text>
-          <Input variant="unstyled" fontSize="2xl" placeholder="Search..." />
+          <Input
+            variant="unstyled"
+            fontSize="2xl"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <FiSearch size={30} />
         </Flex>
-        {/* <HStack > */}
-        <Grid templateColumns="repeat(4, 1fr)" gap="2" mt="8">
-          {topUtilities.map(({ id, slug, href }, index) => (
+        <Grid
+          templateColumns={['repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)']}
+          gap="2"
+          mt="8"
+        >
+          {filteredTopUtilities.map(({ id, slug, href }, index) => (
             <Link href={href} key={id}>
               <a style={{ width: '100%' }}>
                 <Badge
@@ -52,7 +72,7 @@ const Index = ({ topUtilities = [] }) => {
                   w="100%"
                   p="4"
                   rounded="sm"
-                  bg={badgeColors[index % (badgeColors.length - 1)]}
+                  bg={badgeColors[index % badgeColors.length]}
                   mt="1"
                 >
                   <Text color="white">{slug}</Text>
@@ -61,7 +81,6 @@ const Index = ({ topUtilities = [] }) => {
             </Link>
           ))}
         </Grid>
-        {/* </HStack> */}
       </Container>
     </Page>
   )
