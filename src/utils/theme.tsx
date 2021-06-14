@@ -16,7 +16,6 @@ const theme = extendTheme({
     lightWhite: '#fafafa',
     alert: '#ff007f',
     violet: '#7a29c9',
-    cyan: '#59e4c3',
     secondary: '#666666',
     red: '#ee0202',
   },

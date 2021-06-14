@@ -1,18 +1,13 @@
 import * as React from 'react'
-import { useRouter } from 'next/router'
 import {
   Flex,
   Text,
-  Container,
   Radio,
   RadioGroup,
   Stack,
   Button,
-  ButtonGroup,
-  IconButton,
   useToast,
   useColorModeValue,
-  Spacer,
   NumberInput,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -22,9 +17,11 @@ import {
   FormLabel,
   Switch,
   VStack,
+  HStack,
 } from '@chakra-ui/react'
 import * as uuid from 'uuid'
 import { MdContentCopy } from 'react-icons/md'
+import { RiDownloadLine } from 'react-icons/ri'
 
 import { Page } from '../../components/Page'
 import { UtilityTitle } from '../../components/UtilityTitle'
@@ -38,6 +35,10 @@ const generateUUID = (version = '4') => {
   return uuidGenerator[version]()
 }
 
+const composeUUID = (uuids: Array<string>) => {
+  return uuids.join('\n')
+}
+
 const GenerateUUID = () => {
   const [value, setValue] = React.useState<string>('4')
   const [uuid, setUuid] = React.useState<string>('Press generate to create new UUID')
@@ -46,10 +47,6 @@ const GenerateUUID = () => {
   const [bulkUUIDCount, setBulkUUIDCount] = React.useState(1)
   const toast = useToast()
   const boxShadow = useColorModeValue('0 5px 10px #0000001f', '0 0 0 1px #333')
-
-  const pathname = useRouter().pathname
-
-  const title = pathname.split('/')[2] ?? ''
 
   const onUUIDVersionChange = (value) => {
     setValue(value)
@@ -64,7 +61,9 @@ const GenerateUUID = () => {
 
   const onCopy = () => {
     try {
-      navigator.clipboard.writeText(uuid)
+      const uuids = bulkGenerate ? composeUUID(bulkUUID) : uuid
+
+      navigator.clipboard.writeText(uuids)
       toast({
         title: 'Copied!',
         status: 'success',
@@ -77,7 +76,7 @@ const GenerateUUID = () => {
   const renderBulkUUID = () => {
     if (!bulkGenerate) {
       return (
-        <Text fontSize="md" textAlign="center">
+        <Text fontSize="lg" textAlign="center" fontWeight="semibold">
           {uuid}
         </Text>
       )
@@ -87,7 +86,7 @@ const GenerateUUID = () => {
       return (
         <VStack spacing="4">
           {bulkUUID.map((id) => (
-            <Text fontSize="md" textAlign="center" key={id}>
+            <Text fontSize="lg" textAlign="center" key={id} fontWeight="semibold">
               {id}
             </Text>
           ))}
@@ -96,51 +95,69 @@ const GenerateUUID = () => {
     }
 
     return (
-      <Text fontSize="md" textAlign="center">
+      <Text fontSize="lg" textAlign="center" fontWeight="semibold">
         Press Generate to create bulk uuid
       </Text>
     )
   }
 
+  const downloadToFile = () => {
+    const element = document.createElement('a')
+    const file = new Blob([composeUUID(bulkUUID)], { type: 'text/plain' })
+    element.href = URL.createObjectURL(file)
+    element.download = 'generated-uuid.txt'
+    document.body.appendChild(element) // Required for this to work in FireFox
+    element.click()
+  }
+
   return (
     <Page>
-      <Wrapper maxW="container.lg" mt="10" p={[12, 8, 6, 0]}>
+      <Wrapper maxW="container.lg" mt="10" p={[12, 8, 6, 0]} mb="8">
         <Flex alignItems="flex-start" justifyContent="space-between">
-          <Flex mr="6" alignItems="flex-start" justifyContent="center" rounded="sm">
-            <Text fontSize="2xl" fontWeight="semibold">
-              {/* {uuid} */}
-              <UtilityTitle>Generate UUID</UtilityTitle>
-            </Text>
-          </Flex>
-          {/* <Flex w="100%">
-            <Flex flexDir="column">
-              <Text color="grey">Version</Text>
-              <Text>v1</Text>
+          <HStack spacing="8" w="100%" justifyContent="space-between">
+            <Flex
+              mr="6"
+              alignItems="flex-start"
+              flex="1"
+              justifyContent="flex-start"
+              flexDir="column"
+              mb="auto"
+              h="100%"
+              rounded="sm"
+            >
+              <Text fontSize="2xl" fontWeight="semibold">
+                <UtilityTitle>Generate UUID</UtilityTitle>
+              </Text>
             </Flex>
-          </Flex> */}
-          <Flex alignItems="flex-start" justifyContent="space-between" mt="4" flexDir="column">
-            <VStack alignItems="flex-start" flexDir="column" spacing="4">
-              <RadioGroup onChange={onUUIDVersionChange} value={value}>
-                <Stack display="flex" direction="row" alignItems="center">
-                  <Text fontSize="lg" fontWeight="semibold">
-                    Version:
-                  </Text>
-                  <Radio value="1">v1</Radio>
-                  <Radio value="4">v4</Radio>
-                </Stack>
-              </RadioGroup>
-              <FormControl display="flex" alignItems="center">
-                <FormLabel htmlFor="email-alerts" mb="0">
-                  Enable Bulk generate
-                </FormLabel>
-                <Switch
-                  id="email-alerts"
-                  isChecked={bulkGenerate}
-                  onChange={(e) => setBulkGenerate((state) => !state)}
-                />
-              </FormControl>
-              {bulkGenerate && (
-                <Flex alignItems="center" justifyContent="space-between" w="100%">
+            <Flex alignItems="flex-start" justifyContent="space-between" mt="4" flexDir="column">
+              <VStack alignItems="flex-start" flexDir="column" spacing="4">
+                <RadioGroup onChange={onUUIDVersionChange} value={value} colorScheme="cyan">
+                  <Stack display="flex" direction="row" alignItems="center">
+                    <Text fontSize="lg" fontWeight="semibold">
+                      Version:
+                    </Text>
+                    <Radio value="1">v1</Radio>
+                    <Radio value="4">v4</Radio>
+                  </Stack>
+                </RadioGroup>
+                <FormControl display="flex" alignItems="center">
+                  <FormLabel htmlFor="email-alerts" mb="0">
+                    Enable Bulk generate
+                  </FormLabel>
+                  <Switch
+                    colorScheme="cyan"
+                    id="email-alerts"
+                    isChecked={bulkGenerate}
+                    onChange={(e) => setBulkGenerate((state) => !state)}
+                  />
+                </FormControl>
+                <Flex
+                  alignItems="center"
+                  justifyContent="space-between"
+                  visibility={bulkGenerate ? 'visible' : 'hidden'}
+                  w="100%"
+                  transition="visibility 250ms"
+                >
                   <Text marginRight="auto">Bulk Generate</Text>
                   <NumberInput
                     size="sm"
@@ -158,12 +175,18 @@ const GenerateUUID = () => {
                     </NumberInputStepper>
                   </NumberInput>
                 </Flex>
-              )}
-              <Button onClick={onGenerateUUID} mt="auto" w="100%">
-                Generate
-              </Button>
-            </VStack>
-          </Flex>
+                <Button
+                  onClick={onGenerateUUID}
+                  mt="auto"
+                  w="100%"
+                  variant="outline"
+                  colorScheme="cyan"
+                >
+                  Generate
+                </Button>
+              </VStack>
+            </Flex>
+          </HStack>
         </Flex>
         <Flex
           rounded="sm"
@@ -176,15 +199,27 @@ const GenerateUUID = () => {
           transition="box-shadow 0.2s ease 0s"
           boxShadow={boxShadow}
         >
-          <Text>Generated UUID</Text>
-          <Button
-            leftIcon={<MdContentCopy />}
-            variant="outline"
-            aria-label="copy uuid"
-            onClick={onCopy}
-          >
-            Copy to Clipboard
-          </Button>
+          <Text fontSize="xl">Generated UUID</Text>
+          <HStack spacing="4">
+            {bulkGenerate && (
+              <Button
+                leftIcon={<RiDownloadLine />}
+                variant="outline"
+                aria-label="download generate uuid to a file"
+                onClick={downloadToFile}
+              >
+                Download to a file
+              </Button>
+            )}
+            <Button
+              leftIcon={<MdContentCopy />}
+              variant="outline"
+              aria-label="copy uuid"
+              onClick={onCopy}
+            >
+              Copy to Clipboard
+            </Button>
+          </HStack>
         </Flex>
         {renderBulkUUID()}
       </Wrapper>
