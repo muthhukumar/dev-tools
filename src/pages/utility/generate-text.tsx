@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, Container, Radio, RadioGroup, Stack } from '@chakra-ui/react'
+import { Text, Container } from '@chakra-ui/react'
 
 import { Page } from '../../components/Page'
 

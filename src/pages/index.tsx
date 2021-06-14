@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { Grid, Badge, chakra, Container, Text, Flex, Box, Input } from '@chakra-ui/react'
+import { Grid, Badge, chakra, Container, Text, Flex, Input } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
 
 import { Page } from '../components/Page'
