@@ -22,6 +22,8 @@ export const Header = () => {
       mx="auto"
       mt="8"
       mb="14"
+      pt="4"
+      pb="4"
     >
       <IconButton
         variant="ghost"
