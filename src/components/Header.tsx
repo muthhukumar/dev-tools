@@ -22,8 +22,7 @@ export const Header = () => {
       mx="auto"
       mt="8"
       mb="14"
-      pt="4"
-      pb="4"
+      pos="relative"
     >
       <IconButton
         variant="ghost"
@@ -33,7 +32,15 @@ export const Header = () => {
         rounded="full"
         onClick={() => router.back()}
       />
-      <Text fontSize="xl" fontWeight="semibold" alignSelf="center">
+      <Text
+        fontSize="xl"
+        fontWeight="semibold"
+        textAlign="center"
+        zIndex="-10"
+        position="absolute"
+        left="0"
+        right="0"
+      >
         DevTools & Utilities
       </Text>
       <Flex justifySelf="flex-end">
