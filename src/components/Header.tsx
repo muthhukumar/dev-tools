@@ -34,7 +34,7 @@ export const Header = () => {
         onClick={() => router.back()}
       />
       <Text fontSize="xl" fontWeight="semibold" alignSelf="center">
-        Dev Utils
+        DevTools & Utilities
       </Text>
       <Flex justifySelf="flex-end">
         <FaTwitter />

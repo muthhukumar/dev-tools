@@ -2,6 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Grid, Badge, chakra, Container, Text, Flex, Input } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
+import { NextSeo } from 'next-seo'
 
 import { Page } from '../components/Page'
 import { getUtilitySlugs } from '../utils/files'
@@ -20,10 +21,14 @@ const Index = ({ topUtilities = [] }) => {
 
   return (
     <Page>
+      <NextSeo
+        title="DevTools and Utilities"
+        description="A ridiculous amount of collection of dev tools and utilities."
+      />
       <Container maxW="container.md">
         <Container centerContent minW="100%">
           <Text fontWeight="hairline" fontSize="5xl">
-            Muthu's Dev utilities
+            Muthu's DevTools and Utilities
           </Text>
           <Text textAlign="center" mt="2">
             Hey! I'm{' '}
@@ -32,7 +37,7 @@ const Index = ({ topUtilities = [] }) => {
                 <chakra.strong>@muthu</chakra.strong>
               </a>
             </Link>{' '}
-            and this is the list of dev utilities I have created.
+            and this is the list of dev tools and utilities I have created.
           </Text>
         </Container>
         <Flex

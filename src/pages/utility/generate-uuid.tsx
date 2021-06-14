@@ -22,6 +22,7 @@ import {
 import * as uuid from 'uuid'
 import { MdContentCopy } from 'react-icons/md'
 import { RiDownloadLine } from 'react-icons/ri'
+import { NextSeo } from 'next-seo'
 
 import { Page } from '../../components/Page'
 import { UtilityTitle } from '../../components/UtilityTitle'
@@ -112,6 +113,10 @@ const GenerateUUID = () => {
 
   return (
     <Page>
+      <NextSeo
+        title="Generate UUID"
+        description="Generate UUID (Universal unique identifiers with ease. Generate single or bulk set of UUIDs and if wanted download them with a single click."
+      />
       <Wrapper maxW="container.lg" mt="10" p={[12, 8, 6, 0]} mb="8">
         <Flex alignItems="flex-start" justifyContent="space-between">
           <HStack spacing="8" w="100%" justifyContent="space-between">
