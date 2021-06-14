@@ -52,7 +52,7 @@ const Index = ({ topUtilities = [] }) => {
                   w="100%"
                   p="4"
                   rounded="sm"
-                  bg={badgeColors[index % (topUtilities.length - 2)]}
+                  bg={badgeColors[index % (badgeColors.length - 1)]}
                   mt="1"
                 >
                   <Text color="white">{slug}</Text>
