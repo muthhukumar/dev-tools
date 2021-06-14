@@ -153,6 +153,7 @@ const GenerateUUID = () => {
               borderWidth="1px"
               p={[2, 4, 6, 10]}
               rounded="md"
+              borderColor="cyan.900"
             >
               <RadioGroup onChange={onUUIDVersionChange} value={value} colorScheme="cyan">
                 <Stack display="flex" direction="row" alignItems="center">
