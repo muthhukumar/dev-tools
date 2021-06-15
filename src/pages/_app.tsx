@@ -1,3 +1,6 @@
+import '@fontsource/roboto-mono/400.css'
+import '@fontsource/open-sans/700.css'
+
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { ChakraProvider } from '@chakra-ui/react'
