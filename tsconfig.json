@@ -17,6 +17,6 @@
     "importsNotUsedAsValues": "error",
     "noUnusedLocals": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/utils/gtags.ts"],
   "exclude": ["node_modules"]
 }
