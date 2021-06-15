@@ -153,7 +153,7 @@ const GenerateUUID = () => {
               align="stretch"
               w="100%"
               borderWidth="1px"
-              p={[2, 4, 6, 10]}
+              p={[2, 4, 4, 4]}
               rounded="md"
               borderColor="cyan.900"
             >

@@ -1,16 +1,25 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { Grid, Badge, chakra, Container, Text, Flex, Input } from '@chakra-ui/react'
+import {
+  Heading,
+  Grid,
+  chakra,
+  Container,
+  Text,
+  Flex,
+  Input,
+  Button,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
 import { NextSeo } from 'next-seo'
 
 import { Page } from '../components/Page'
 import { getUtilitySlugs } from '../utils/files'
 import { useSearch } from '../utils/hooks/useSearch'
+import { GradientWrapper } from '../components/GradientWrapper'
 
 import type { Utility } from '../utils/types/utilitiy'
-
-const badgeColors = ['alert', 'violet', 'cyan']
 
 const Index = ({ topUtilities = [] }) => {
   const {
@@ -19,6 +28,9 @@ const Index = ({ topUtilities = [] }) => {
     result: filteredTopUtilities,
   } = useSearch<Utility>(topUtilities, 'slug')
 
+  const bg = useColorModeValue('white', 'black')
+  const buttonBg = useColorModeValue('black', 'white')
+
   return (
     <Page>
       <NextSeo
@@ -26,62 +38,52 @@ const Index = ({ topUtilities = [] }) => {
         description="A ridiculous amount of collection of dev tools and utilities."
       />
       <Container maxW="container.md">
-        <Container centerContent minW="100%">
-          <Text fontWeight="hairline" fontSize="5xl">
-            Muthu's DevTools and Utilities
-          </Text>
-          <Text textAlign="center" mt="2">
-            Hey! I'm{' '}
+        <Container centerContent minW="100%" p="0">
+          <Heading fontWeight="hairline" fontSize={['3xl', '4xl', '6xl', '8xl']}>
+            Muthu&apos;s DevTools and Utilities
+          </Heading>
+          <Text mt="8" fontSize={['sm', 'md', 'lg', 'lg']}>
+            Hey! I&apos;m{' '}
             <Link href="https://nullish.in">
               <a>
                 <chakra.strong>@muthu</chakra.strong>
               </a>
             </Link>{' '}
-            and this is the list of dev tools and utilities I have created.
+            and this is a modest collection of dev tools and utilities I have created.
           </Text>
         </Container>
-        <Flex
-          borderColor="white.50"
-          borderWidth="1px"
-          w="100%"
-          rounded="sm"
-          mt="8"
-          alignItems="center"
-          p="4"
-        >
-          <Badge colorScheme="gray" p="2">
-            devUtils.nullish.in
-          </Badge>{' '}
-          <Text mx="2" fontSize="2xl">
-            /
-          </Text>
-          <Input
-            variant="unstyled"
-            fontSize="2xl"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <FiSearch size={30} />
-        </Flex>
+        <GradientWrapper pos="relative" height="80px" mt="16">
+          <Flex
+            borderColor="white.50"
+            borderWidth="1px"
+            w="100%"
+            h="100%"
+            px="4"
+            background={bg}
+            rounded="xl"
+            alignItems="center"
+          >
+            <Input
+              variant="unstyled"
+              fontSize="2xl"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <FiSearch size={30} />
+          </Flex>
+        </GradientWrapper>
         <Grid
-          templateColumns={['repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)']}
+          templateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)']}
           gap="2"
           mt="8"
         >
           {filteredTopUtilities.map(({ id, slug, href }, index) => (
             <Link href={href} key={id}>
               <a style={{ width: '100%' }}>
-                <Badge
-                  key={slug}
-                  w="100%"
-                  p="4"
-                  rounded="sm"
-                  bg={badgeColors[index % badgeColors.length]}
-                  mt="1"
-                >
-                  <Text color="white">{slug}</Text>
-                </Badge>
+                <Button key={slug} bg={buttonBg} size="lg" mt="1" rounded="xl">
+                  <Text color={bg}>{slug}</Text>
+                </Button>
               </a>
             </Link>
           ))}

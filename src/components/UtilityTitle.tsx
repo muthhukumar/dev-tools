@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Text, TextProps } from '@chakra-ui/react'
+import { Heading, TextProps } from '@chakra-ui/react'
 
 export const UtilityTitle = (props: TextProps) => {
-  return <Text fontWeight="light" fontSize="4xl" {...props} />
+  return <Heading fontWeight="light" fontSize="4xl" {...props} />
 }

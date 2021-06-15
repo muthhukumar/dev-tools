@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, Flex, IconButton } from '@chakra-ui/react'
+import { Flex, IconButton, Heading } from '@chakra-ui/react'
 import { FaTwitter } from 'react-icons/fa'
 import { IoIosArrowRoundBack } from 'react-icons/io'
 import { useRouter } from 'next/router'
@@ -32,7 +32,7 @@ export const Header = () => {
         rounded="full"
         onClick={() => router.back()}
       />
-      <Text
+      <Heading
         fontSize="xl"
         fontWeight="semibold"
         textAlign="center"
@@ -42,7 +42,7 @@ export const Header = () => {
         right="0"
       >
         DevTools & Utilities
-      </Text>
+      </Heading>
       <Flex justifySelf="flex-end">
         <FaTwitter />
       </Flex>

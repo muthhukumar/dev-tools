@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Divider, Text, Container, Flex, Badge, VStack } from '@chakra-ui/react'
+import { Divider, Text, Container, Flex, VStack, Button } from '@chakra-ui/react'
 import { BsArrowRight } from 'react-icons/bs'
 import { ThemeSwitchButton } from './DarkModeSwitch'
+import React from 'react'
 
 export const Footer = () => {
   const router = useRouter()
@@ -21,18 +22,21 @@ export const Footer = () => {
     >
       <Flex alignItems="center" justifyContent="space-between">
         <Flex alignItems="center">
-          <BsArrowRight size={30} /> <Text ml="4">See something missing?</Text>
+          <BsArrowRight size={30} />{' '}
+          <Text ml="4" fontSize="lg">
+            See something missing?
+          </Text>
         </Flex>
-        <Badge variant="subtle" p="2">
-          Request Utility
-        </Badge>
+        <Button size="lg" mt="1" rounded="xl">
+          <Text fontSize="lg">Request Utility</Text>
+        </Button>
       </Flex>
       <Divider my="6" w="100%" />
       <Flex alignItems="center" justifyContent="space-between">
         <VStack>
           <Link href="/">
             <a>
-              <Text>Home</Text>
+              <Text fontSize="lg">Home</Text>
             </a>
           </Link>
         </VStack>
