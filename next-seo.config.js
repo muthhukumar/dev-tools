@@ -9,6 +9,16 @@ export default {
     site: '@_Muthukumar_P',
     cardType: 'summary_large_image',
   },
+  additionalMetaTags: [
+    {
+      name: 'msapplication-TileColor',
+      content: '#da532c',
+    },
+    {
+      name: 'theme-color',
+      content: '#ffffff',
+    },
+  ],
   additionalLinkTags: [
     {
       rel: 'apple-touch-icon',
@@ -30,14 +40,6 @@ export default {
       rel: 'mask-icon',
       href: '/safari-pinned-tab.svg',
       color: '#5bbad5',
-    },
-    {
-      name: 'msapplication-TileColor',
-      content: '#da532c',
-    },
-    {
-      name: 'theme-color',
-      content: '#ffffff',
     },
     {
       rel: 'manifest',
