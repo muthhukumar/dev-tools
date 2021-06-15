@@ -169,7 +169,7 @@ const GenerateUUID = () => {
                 </HStack>
               </RadioGroup>
               <FormControl display="flex" alignItems="center">
-                <FormLabel htmlFor="email-alerts" mb="0">
+                <FormLabel htmlFor="email-alerts" mb="0" fontSize="lg" fontWeight="semibold">
                   Enable Bulk generate
                 </FormLabel>
                 <Switch
