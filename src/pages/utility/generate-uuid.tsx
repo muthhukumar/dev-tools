@@ -32,6 +32,7 @@ const generateUUID = (version = '4') => {
   const uuidGenerator = {
     '1': () => uuid.v1(),
     '4': () => uuid.v4(),
+    'NIL_UUID': () => uuid.NIL,
   }
   return uuidGenerator[version]()
 }
@@ -46,7 +47,9 @@ const GenerateUUID = () => {
   const [bulkGenerate, setBulkGenerate] = React.useState<boolean>(false)
   const [bulkUUID, setBulkUUID] = React.useState<Array<string>>([])
   const [bulkUUIDCount, setBulkUUIDCount] = React.useState(1)
+
   const toast = useToast()
+
   const boxShadow = useColorModeValue('0 5px 10px #0000001f', '0 0 0 1px #333')
 
   const onUUIDVersionChange = (value) => {
@@ -156,13 +159,14 @@ const GenerateUUID = () => {
               borderColor="cyan.900"
             >
               <RadioGroup onChange={onUUIDVersionChange} value={value} colorScheme="cyan">
-                <Stack display="flex" direction="row" alignItems="center">
+                <HStack display="flex" direction="row" alignItems="center" spacing="4">
                   <Text fontSize="lg" fontWeight="semibold">
                     Version:
                   </Text>
                   <Radio value="1">v1</Radio>
                   <Radio value="4">v4</Radio>
-                </Stack>
+                  <Radio value="NIL_UUID">Empty / Nil UUID</Radio>
+                </HStack>
               </RadioGroup>
               <FormControl display="flex" alignItems="center">
                 <FormLabel htmlFor="email-alerts" mb="0">
