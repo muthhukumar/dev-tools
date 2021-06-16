@@ -26,6 +26,7 @@ import { NextSeo } from 'next-seo'
 import { Page } from '../../components/Page'
 import { UtilityTitle } from '../../components/UtilityTitle'
 import { Wrapper } from '../../components/Wrapper'
+import { useColor } from '../../utils/hooks/useColor'
 
 const generateUUID = (version = '4') => {
   const uuidGenerator = {
@@ -43,11 +44,12 @@ const composeUUID = (uuids: Array<string>) => {
 const GenerateUUID = () => {
   const [value, setValue] = React.useState<string>('4')
   const [uuid, setUuid] = React.useState<string>('Press generate to create new UUID')
-  const [bulkGenerate, setBulkGenerate] = React.useState<boolean>(false)
-  const [bulkUUID, setBulkUUID] = React.useState<Array<string>>([])
-  const [bulkUUIDCount, setBulkUUIDCount] = React.useState(1)
+  const [generateBulkUUID, setGenerateBulkUUID] = React.useState<boolean>(false)
+  const [bulkUUIDs, setBulkUUIDs] = React.useState<Array<string>>([])
+  const [bulkUUIDsCount, setBulkUUIDsCount] = React.useState(1)
 
   const toast = useToast()
+  const { moon } = useColor()
 
   const boxShadow = useColorModeValue('0 5px 10px #0000001f', '0 0 0 1px #333')
 
@@ -56,15 +58,15 @@ const GenerateUUID = () => {
   }
 
   const onGenerateUUID = () => {
-    if (bulkGenerate) {
-      return setBulkUUID(Array.from({ length: bulkUUIDCount }, () => generateUUID(String(value))))
+    if (generateBulkUUID) {
+      return setBulkUUIDs(Array.from({ length: bulkUUIDsCount }, () => generateUUID(String(value))))
     }
     setUuid(generateUUID(String(value)))
   }
 
   const onCopy = () => {
     try {
-      const uuids = bulkGenerate ? composeUUID(bulkUUID) : uuid
+      const uuids = generateBulkUUID ? composeUUID(bulkUUIDs) : uuid
 
       navigator.clipboard.writeText(uuids)
       toast({
@@ -77,7 +79,7 @@ const GenerateUUID = () => {
   }
 
   const renderBulkUUID = () => {
-    if (!bulkGenerate) {
+    if (!generateBulkUUID) {
       return (
         <Text fontSize="lg" textAlign="center" fontWeight="semibold">
           {uuid}
@@ -85,14 +87,17 @@ const GenerateUUID = () => {
       )
     }
 
-    if (bulkUUID.length > 0) {
+    if (bulkUUIDs.length > 0) {
       return (
         <VStack spacing="4">
-          {bulkUUID.map((id) => (
-            <Text fontSize="lg" textAlign="center" key={id} fontWeight="semibold">
-              {id}
-            </Text>
-          ))}
+          {bulkUUIDs.map((id) => {
+            // const key = value === 'NIL_UUID' ? generateUUID() : id
+            return (
+              <Text fontSize="lg" textAlign="center" key={generateUUID()} fontWeight="semibold">
+                {id}
+              </Text>
+            )
+          })}
         </VStack>
       )
     }
@@ -106,7 +111,7 @@ const GenerateUUID = () => {
 
   const downloadToFile = () => {
     const element = document.createElement('a')
-    const file = new Blob([composeUUID(bulkUUID)], { type: 'text/plain' })
+    const file = new Blob([composeUUID(bulkUUIDs)], { type: 'text/plain' })
     element.href = URL.createObjectURL(file)
     element.download = 'generated-uuid.txt'
     document.body.appendChild(element) // Required for this to work in FireFox
@@ -135,9 +140,7 @@ const GenerateUUID = () => {
             w="100%"
             flex="1"
           >
-            <Text fontSize="2xl" fontWeight="semibold">
-              <UtilityTitle>Generate UUID</UtilityTitle>
-            </Text>
+            <UtilityTitle>Generate UUID</UtilityTitle>
           </Flex>
           <Flex
             alignItems="flex-start"
@@ -145,6 +148,7 @@ const GenerateUUID = () => {
             mt="4"
             flexDir="column"
             w={['100%', '100%', 'initial', 'initial']}
+            bg={moon}
           >
             <VStack
               alignItems="flex-start"
@@ -174,14 +178,14 @@ const GenerateUUID = () => {
                 <Switch
                   colorScheme="cyan"
                   id="email-alerts"
-                  isChecked={bulkGenerate}
-                  onChange={(e) => setBulkGenerate((state) => !state)}
+                  isChecked={generateBulkUUID}
+                  onChange={(e) => setGenerateBulkUUID((state) => !state)}
                 />
               </FormControl>
               <Flex
                 alignItems="center"
                 justifyContent="space-between"
-                visibility={bulkGenerate ? 'visible' : 'hidden'}
+                visibility={generateBulkUUID ? 'visible' : 'hidden'}
                 w="100%"
                 transition="visibility 250ms"
               >
@@ -192,8 +196,8 @@ const GenerateUUID = () => {
                   min={1}
                   max={500}
                   maxW={16}
-                  value={bulkUUIDCount}
-                  onChange={(_, count) => setBulkUUIDCount(count)}
+                  value={bulkUUIDsCount}
+                  onChange={(_, count) => setBulkUUIDsCount(count)}
                 >
                   <NumberInputField />
                   <NumberInputStepper>
@@ -226,12 +230,13 @@ const GenerateUUID = () => {
           transition="box-shadow 0.2s ease 0s"
           boxShadow={boxShadow}
           flexDir={['column', 'column', 'row', 'row']}
+          bg={moon}
         >
           <Text fontSize={['lg', 'lg', 'lg', 'xl']} mb={[4, 2, 0, 0]}>
             Generated UUID
           </Text>
           <HStack spacing="4">
-            {bulkGenerate && (
+            {generateBulkUUID && (
               <Button
                 leftIcon={<RiDownloadLine />}
                 variant="outline"
