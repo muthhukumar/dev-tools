@@ -56,7 +56,7 @@ const GenerateUUID = () => {
   const [bulkUUIDsCount, setBulkUUIDsCount] = React.useState(1)
 
   const toast = useToast()
-  const buttonSize = useBreakpointValue(['md', 'md', 'md', 'lg'])
+  const buttonSize = useBreakpointValue(['md', 'md', 'lg', 'lg'])
 
   const onUUIDVersionChange = (value) => {
     setValue(value)
@@ -150,7 +150,6 @@ const GenerateUUID = () => {
         <Flex
           alignItems="flex-start"
           justifyContent="space-between"
-          // flexDir={['column', 'column', 'row', 'row']}
           flexDir="column"
         >
           <UtilityTitle>Generate UUID</UtilityTitle>
@@ -177,10 +176,12 @@ const GenerateUUID = () => {
               <Tabs isFitted variant="enclosed" w="100%">
                 <TabList mb="1em">
                   <Tab>
-                    <Heading variant="gradient">Generated UUID</Heading>
+                    <Heading variant="gradient" fontSize={['lg', 'lg', '3xl', '3xl']}>
+                      Generated UUID
+                    </Heading>
                   </Tab>
                   <Tab>
-                    <Heading>Settings</Heading>
+                    <Heading fontSize={['lg', 'lg', '3xl', '3xl']}>Settings</Heading>
                   </Tab>
                 </TabList>
                 <TabPanels>
@@ -190,11 +191,10 @@ const GenerateUUID = () => {
                       alignItems={['center', 'center', 'flex-start', 'flex-start']}
                       justifyContent="space-between"
                     >
-                      {/* <Flex> */}
                       {renderBulkUUID()}
                       <Stack
                         spacing="2"
-                        direction={['row', 'row', 'column', 'column']}
+                        dir="column"
                         w={['100%', '100%', 'initial', 'initial']}
                         mb={[4, 6, 0, 0]}
                       >
@@ -204,14 +204,13 @@ const GenerateUUID = () => {
                           w="100%"
                           variant="moonInvert"
                           size={buttonSize}
-                          fontSize={['sm', 'sm', 'lg', 'lg']}
                           colorScheme="cyan"
                         >
                           Generate
                         </Button>
+
                         <Button
                           size={buttonSize}
-                          fontSize={['sm', 'sm', 'lg', 'lg']}
                           leftIcon={<MdContentCopy />}
                           variant="moonInvert"
                           aria-label="copy uuid"
@@ -225,7 +224,6 @@ const GenerateUUID = () => {
                             leftIcon={<RiDownloadLine />}
                             variant="moonInvert"
                             size={buttonSize}
-                            fontSize={['sm', 'sm', 'lg', 'lg']}
                             w="100%"
                             aria-label="download generate uuid to a file"
                             onClick={downloadToFile}
@@ -286,7 +284,8 @@ const GenerateUUID = () => {
                           defaultValue={0}
                           min={1}
                           max={500}
-                          maxW="10%"
+                          minW={20}
+                          maxW={['20%', '20%', '10%', '10%']}
                           value={bulkUUIDsCount}
                           onChange={onBulkCountChange}
                         >
