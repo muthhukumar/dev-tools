@@ -21,7 +21,7 @@ export const Header = () => {
       justifyContent="space-between"
       mx="auto"
       mt={[4, 6, 8, 8]}
-      mb={[6, 8, 14, 14]}
+      mb={[2, 4, 10, 14]}
       pos="relative"
     >
       <IconButton
