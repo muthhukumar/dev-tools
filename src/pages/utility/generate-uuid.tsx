@@ -118,6 +118,12 @@ const GenerateUUID = () => {
     element.click()
   }
 
+  const onBulkCountChange = (_, count) => {
+    if (!isNaN(count)) {
+      setBulkUUIDsCount(count)
+    }
+  }
+
   return (
     <Page>
       <NextSeo
@@ -197,7 +203,7 @@ const GenerateUUID = () => {
                   max={500}
                   maxW={16}
                   value={bulkUUIDsCount}
-                  onChange={(_, count) => setBulkUUIDsCount(count)}
+                  onChange={onBulkCountChange}
                 >
                   <NumberInputField />
                   <NumberInputStepper>

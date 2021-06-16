@@ -20,8 +20,8 @@ export const Header = () => {
       alignItems="center"
       justifyContent="space-between"
       mx="auto"
-      mt="8"
-      mb="14"
+      mt={[4, 6, 8, 8]}
+      mb={[6, 8, 14, 14]}
       pos="relative"
     >
       <IconButton
