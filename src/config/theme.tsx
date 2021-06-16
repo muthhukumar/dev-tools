@@ -49,6 +49,9 @@ const theme = extendTheme({
   },
   styles: {
     global: (props) => ({
+      '*::-webkit-scrollbar': {
+        display: 'none',
+      },
       html: {
         scrollBehavior: 'smooth',
       },
