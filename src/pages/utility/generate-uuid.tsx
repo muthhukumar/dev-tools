@@ -134,10 +134,10 @@ const GenerateUUID = () => {
         title="Generate UUIDs"
         description="Generate UUID (Universal unique identifiers with ease. Generate single or bulk set of UUIDs and if wanted download them with a single click."
       />
-      <Wrapper maxW="container.lg" mb="8">
+      <Wrapper mb="8">
         <Flex alignItems="flex-start" justifyContent="space-between" flexDir="column">
           <UtilityTitle>Generate UUID</UtilityTitle>
-          <VStack align="stretch" my="6">
+          <VStack align="stretch" my="6" spacing={4}>
             <Heading as="h2" size="xl" isTruncated textAlign="left">
               What is a UUID?
             </Heading>

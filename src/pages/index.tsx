@@ -42,7 +42,7 @@ const Index = ({ topUtilities = [] }) => {
             and this is a modest collection of dev tools and utilities I have created.
           </Text>
         </Container>
-        <GradientWrapper pos="relative" height="80px" mt="16">
+        <GradientWrapper height="80px" mt="16">
           <Flex
             borderColor="white.50"
             borderWidth="1px"
