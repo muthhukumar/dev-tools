@@ -26,7 +26,6 @@ import {
   Tabs,
   useBreakpointValue,
 } from '@chakra-ui/react'
-import * as uuid from 'uuid'
 import { MdContentCopy } from 'react-icons/md'
 import { RiDownloadLine } from 'react-icons/ri'
 import { NextSeo } from 'next-seo'
@@ -34,19 +33,7 @@ import { NextSeo } from 'next-seo'
 import { Page } from '../../components/Page'
 import { UtilityTitle } from '../../components/UtilityTitle'
 import { Wrapper } from '../../components/Wrapper'
-
-const generateUUID = (version = '4') => {
-  const uuidGenerator = {
-    '1': () => uuid.v1(),
-    '4': () => uuid.v4(),
-    'NIL_UUID': () => uuid.NIL,
-  }
-  return uuidGenerator[version]()
-}
-
-const composeUUID = (uuids: Array<string>) => {
-  return uuids.join('\n')
-}
+import { composeUUID, generateUUID } from '../../utils/generate-uuid'
 
 const GenerateUUID = () => {
   const [value, setValue] = React.useState<string>('4')
@@ -144,21 +131,26 @@ const GenerateUUID = () => {
   return (
     <Page>
       <NextSeo
-        title="Generate UUID"
+        title="Generate UUIDs"
         description="Generate UUID (Universal unique identifiers with ease. Generate single or bulk set of UUIDs and if wanted download them with a single click."
       />
-      <Wrapper maxW="container.lg" mt="10" mb="8">
+      <Wrapper maxW="container.lg" mb="8">
         <Flex alignItems="flex-start" justifyContent="space-between" flexDir="column">
           <UtilityTitle>Generate UUID</UtilityTitle>
           <VStack align="stretch" my="6">
             <Heading as="h2" size="xl" isTruncated textAlign="left">
-              What is UUID?
+              What is a UUID?
             </Heading>
             <Text>
-              A universally unique identifier is a 128-bit label used for information in computer
-              systems. The term globally unique identifier is also used, often in software created
-              by Microsoft. When generated according to the standard methods, UUIDs are, for
-              practical purposes, unique.
+              A UUID (Universally unique identifier) is a 128 bit number which is used to uniquely
+              identify something. The UUIDs can be generated without a use of a centralized
+              authority. The main idea being that the UUIDs created always be unique. There will be
+              no duplication of the same ID. Duplication of the same ID are extremely unlikely to
+              happen. At least in a single application space.
+            </Text>
+            <Text>
+              There are mainly three different UUIDs. They are version1, version4 and Nil or empty
+              UUID
             </Text>
           </VStack>
 
@@ -169,7 +161,6 @@ const GenerateUUID = () => {
               w="100%"
               flexDir={['column', 'column', 'row', 'row']}
             >
-              {/* <Flex> */}
               <Tabs isFitted variant="enclosed" w="100%">
                 <TabList mb="1em">
                   <Tab>
