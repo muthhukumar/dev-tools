@@ -1,16 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import {
-  Heading,
-  Grid,
-  chakra,
-  Container,
-  Text,
-  Flex,
-  Input,
-  Button,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Heading, Grid, chakra, Container, Text, Flex, Input, Button } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
 import { NextSeo } from 'next-seo'
 
@@ -18,6 +8,7 @@ import { Page } from '../components/Page'
 import { getUtilitySlugs } from '../utils/files'
 import { useSearch } from '../utils/hooks/useSearch'
 import { GradientWrapper } from '../components/GradientWrapper'
+import { useColor } from '../utils/hooks/useColor'
 
 import type { Utility } from '../utils/types/utilitiy'
 
@@ -28,8 +19,7 @@ const Index = ({ topUtilities = [] }) => {
     result: filteredTopUtilities,
   } = useSearch<Utility>(topUtilities, 'slug')
 
-  const bg = useColorModeValue('white', 'black')
-  const buttonBg = useColorModeValue('black', 'white')
+  const { moon, moonInvert } = useColor()
 
   return (
     <Page>
@@ -59,7 +49,7 @@ const Index = ({ topUtilities = [] }) => {
             w="100%"
             h="100%"
             px="4"
-            background={bg}
+            background={moon}
             rounded="xl"
             alignItems="center"
           >
@@ -81,8 +71,8 @@ const Index = ({ topUtilities = [] }) => {
           {filteredTopUtilities.map(({ id, slug, href }, index) => (
             <Link href={href} key={id}>
               <a style={{ width: '100%' }}>
-                <Button key={slug} bg={buttonBg} size="lg" mt="1" rounded="xl">
-                  <Text color={bg}>{slug}</Text>
+                <Button key={slug} bg={moonInvert} size="lg" mt="1" rounded="xl">
+                  <Text color={moon}>{slug}</Text>
                 </Button>
               </a>
             </Link>
@@ -92,8 +82,6 @@ const Index = ({ topUtilities = [] }) => {
     </Page>
   )
 }
-
-// export const ge
 
 export const getStaticProps = () => {
   const topUtilities = getUtilitySlugs()
