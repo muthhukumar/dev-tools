@@ -8,7 +8,7 @@ import { DefaultSeo } from 'next-seo'
 
 import * as gtag from '../utils/gtags'
 import SEO from '../../next-seo.config'
-import theme from '../utils/theme'
+import theme from '../config/theme'
 
 import type { AppProps } from 'next/app'
 
