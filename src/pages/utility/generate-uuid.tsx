@@ -18,7 +18,6 @@ import {
   VStack,
   HStack,
   Heading,
-  Stack,
 } from '@chakra-ui/react'
 import * as uuid from 'uuid'
 import { MdContentCopy } from 'react-icons/md'
