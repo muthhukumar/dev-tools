@@ -17,6 +17,8 @@ import {
   Switch,
   VStack,
   HStack,
+  Heading,
+  Stack,
 } from '@chakra-ui/react'
 import * as uuid from 'uuid'
 import { MdContentCopy } from 'react-icons/md'
@@ -134,26 +136,28 @@ const GenerateUUID = () => {
         <Flex
           alignItems="flex-start"
           justifyContent="space-between"
-          flexDir={['column', 'column', 'row', 'row']}
+          // flexDir={['column', 'column', 'row', 'row']}
+          flexDir="column"
         >
+          <UtilityTitle>Generate UUID</UtilityTitle>
+          <VStack align="stretch" my="6">
+            <Heading as="h2" size="xl" isTruncated textAlign="left">
+              What is UUID?
+            </Heading>
+            <Text>
+              A universally unique identifier is a 128-bit label used for information in computer
+              systems. The term globally unique identifier is also used, often in software created
+              by Microsoft. When generated according to the standard methods, UUIDs are, for
+              practical purposes, unique.
+            </Text>
+          </VStack>
+
           <Flex
-            mr="6"
-            alignItems="flex-start"
-            justifyContent="flex-start"
-            mb="auto"
-            h="100%"
-            rounded="sm"
-            w="100%"
-            flex="1"
-          >
-            <UtilityTitle>Generate UUID</UtilityTitle>
-          </Flex>
-          <Flex
-            alignItems="flex-start"
-            justifyContent="space-between"
             mt="4"
             flexDir="column"
-            w={['100%', '100%', 'initial', 'initial']}
+            alignItems="flex-end"
+            // w={['100%', '100%', 'initial', 'initial']}
+            // w="100%"
             bg={moon}
           >
             <VStack
@@ -161,11 +165,8 @@ const GenerateUUID = () => {
               flexDir="column"
               spacing="4"
               align="stretch"
-              w="100%"
-              borderWidth="1px"
+              // w="100%"
               p={[2, 4, 4, 4]}
-              rounded="md"
-              borderColor="cyan.900"
             >
               <RadioGroup onChange={onUUIDVersionChange} value={value} colorScheme="cyan">
                 <HStack display="flex" direction="row" alignItems="center" spacing="4">
