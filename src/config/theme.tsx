@@ -9,15 +9,43 @@ const breakpoints = createBreakpoints({
 })
 
 const theme = extendTheme({
-  config: {
-    initialColorMode: 'dark',
-  },
   components: {
-    // Flex: {
-    //   baseStyle: ({ colorMode }) => ({
-    //     background: colorMode === 'dark' ? 'white' : 'black',
-    //   }),
-    // },
+    Text: {
+      variants: {
+        gradient: ({ colorMode }) => ({
+          background: 'linear-gradient( 90.69deg ,#88ffea 13.42%,#ff4ecd 42.37%,#1a75ff 103.09%);',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }),
+      },
+    },
+    Heading: {
+      variants: {
+        gradient: ({ colorMode }) => ({
+          background: 'linear-gradient( 90.69deg ,#88ffea 13.42%,#ff4ecd 42.37%,#1a75ff 103.09%);',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }),
+      },
+    },
+    Button: {
+      variants: {
+        moon: ({ colorMode }) => ({
+          rounded: 'xl',
+          size: 'lg',
+          bg: colorMode === 'light' ? 'black' : 'white',
+          color: colorMode === 'light' ? 'white' : 'black',
+        }),
+        moonInvert: ({ colorMode }) => ({
+          rounded: 'xl',
+          size: 'lg',
+          borderWidth: '1px',
+          borderColor: colorMode === 'light' ? 'black' : 'white',
+          bg: colorMode === 'light' ? 'white' : 'black',
+          color: colorMode === 'light' ? 'black' : 'white',
+        }),
+      },
+    },
   },
   styles: {
     global: (props) => ({
@@ -31,11 +59,6 @@ const theme = extendTheme({
           'linear-gradient(90deg,#000 21px,transparent 1%) 50%,linear-gradient(#000 21px,transparent 1%) 50%,#444',
         )(props),
         backgroundSize: '22px 22px',
-        // bg: mode('white', 'black')(props),
-        // background: 'rgba( 0, 0, 0, 0.25 )',
-        // '-webkit-backdrop-filter': 'blur( 10.5px )',
-        // backdropFilter: 'saturate(180%) blur(5px)',
-        // backgroundSize: '22px 22px',
       },
     }),
   },
@@ -54,6 +77,10 @@ const theme = extendTheme({
     body: 'Open Sans',
   },
   breakpoints,
+  config: {
+    useSystemColorMode: true,
+    initialColorMode: 'dark',
+  },
 })
 
 export default theme
