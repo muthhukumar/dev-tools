@@ -97,7 +97,8 @@ const GenerateUUID = () => {
         <Grid
           templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)']}
           gap="4"
-          w="70%"
+          mt={[4, 4, 0, 0]}
+          w="100%"
           maxH="100vh"
           overflowY="scroll"
           justifyContent="center"
@@ -105,8 +106,8 @@ const GenerateUUID = () => {
           {bulkUUIDs.map((id) => {
             return (
               <Text
-                fontSize={['xl', 'xl', 'lg', 'md']}
-                textAlign="center"
+                fontSize={['xl', 'xl', 'lg', 'lg']}
+                textAlign={['center', 'center', 'center', 'left']}
                 key={generateUUID()}
                 fontWeight="semibold"
               >
@@ -147,11 +148,7 @@ const GenerateUUID = () => {
         description="Generate UUID (Universal unique identifiers with ease. Generate single or bulk set of UUIDs and if wanted download them with a single click."
       />
       <Wrapper maxW="container.lg" mt="10" mb="8">
-        <Flex
-          alignItems="flex-start"
-          justifyContent="space-between"
-          flexDir="column"
-        >
+        <Flex alignItems="flex-start" justifyContent="space-between" flexDir="column">
           <UtilityTitle>Generate UUID</UtilityTitle>
           <VStack align="stretch" my="6">
             <Heading as="h2" size="xl" isTruncated textAlign="left">
@@ -185,7 +182,7 @@ const GenerateUUID = () => {
                   </Tab>
                 </TabList>
                 <TabPanels>
-                  <TabPanel>
+                  <TabPanel px={0}>
                     <Flex
                       flexDir={['column-reverse', 'column-reverse', 'row', 'row']}
                       alignItems={['center', 'center', 'flex-start', 'flex-start']}
