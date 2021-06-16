@@ -27,7 +27,7 @@ export const Footer = () => {
             See something missing?
           </Text>
         </Flex>
-        <Button size="lg" mt="1" rounded="xl">
+        <Button size="lg" mt="1" variant="moonInvert">
           <Text fontSize="lg">Request Utility</Text>
         </Button>
       </Flex>
