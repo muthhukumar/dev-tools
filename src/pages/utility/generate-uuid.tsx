@@ -1,12 +1,13 @@
 import * as React from 'react'
 import {
+  Stack,
   Flex,
+  Grid,
   Text,
   Radio,
   RadioGroup,
   Button,
   useToast,
-  useColorModeValue,
   NumberInput,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -18,6 +19,12 @@ import {
   VStack,
   HStack,
   Heading,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import * as uuid from 'uuid'
 import { MdContentCopy } from 'react-icons/md'
@@ -27,7 +34,6 @@ import { NextSeo } from 'next-seo'
 import { Page } from '../../components/Page'
 import { UtilityTitle } from '../../components/UtilityTitle'
 import { Wrapper } from '../../components/Wrapper'
-import { useColor } from '../../utils/hooks/useColor'
 
 const generateUUID = (version = '4') => {
   const uuidGenerator = {
@@ -50,9 +56,7 @@ const GenerateUUID = () => {
   const [bulkUUIDsCount, setBulkUUIDsCount] = React.useState(1)
 
   const toast = useToast()
-  const { moon } = useColor()
-
-  const boxShadow = useColorModeValue('0 5px 10px #0000001f', '0 0 0 1px #333')
+  const buttonSize = useBreakpointValue(['md', 'md', 'md', 'lg'])
 
   const onUUIDVersionChange = (value) => {
     setValue(value)
@@ -90,16 +94,27 @@ const GenerateUUID = () => {
 
     if (bulkUUIDs.length > 0) {
       return (
-        <VStack spacing="4">
+        <Grid
+          templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(2, 1fr)']}
+          gap="4"
+          w="70%"
+          maxH="100vh"
+          overflowY="scroll"
+          justifyContent="center"
+        >
           {bulkUUIDs.map((id) => {
-            // const key = value === 'NIL_UUID' ? generateUUID() : id
             return (
-              <Text fontSize="lg" textAlign="center" key={generateUUID()} fontWeight="semibold">
+              <Text
+                fontSize={['xl', 'xl', 'lg', 'md']}
+                textAlign="center"
+                key={generateUUID()}
+                fontWeight="semibold"
+              >
                 {id}
               </Text>
             )
           })}
-        </VStack>
+        </Grid>
       )
     }
 
@@ -151,120 +166,144 @@ const GenerateUUID = () => {
             </Text>
           </VStack>
 
-          <Flex
-            mt="4"
-            flexDir="column"
-            alignItems="flex-end"
-            // w={['100%', '100%', 'initial', 'initial']}
-            // w="100%"
-            bg={moon}
-          >
-            <VStack
+          <Flex mt="4" w="100%">
+            <Flex
               alignItems="flex-start"
-              flexDir="column"
-              spacing="4"
-              align="stretch"
-              // w="100%"
-              p={[2, 4, 4, 4]}
+              justifyContent="space-between"
+              w="100%"
+              flexDir={['column', 'column', 'row', 'row']}
             >
-              <RadioGroup onChange={onUUIDVersionChange} value={value} colorScheme="cyan">
-                <HStack display="flex" direction="row" alignItems="center" spacing="4">
-                  <Text fontSize="lg" fontWeight="semibold">
-                    Version:
-                  </Text>
-                  <Radio value="1">v1</Radio>
-                  <Radio value="4">v4</Radio>
-                  <Radio value="NIL_UUID">Empty / Nil UUID</Radio>
-                </HStack>
-              </RadioGroup>
-              <FormControl display="flex" alignItems="center">
-                <FormLabel htmlFor="email-alerts" mb="0" fontSize="lg" fontWeight="semibold">
-                  Enable Bulk generate
-                </FormLabel>
-                <Switch
-                  colorScheme="cyan"
-                  id="email-alerts"
-                  isChecked={generateBulkUUID}
-                  onChange={(e) => setGenerateBulkUUID((state) => !state)}
-                />
-              </FormControl>
-              <Flex
-                alignItems="center"
-                justifyContent="space-between"
-                visibility={generateBulkUUID ? 'visible' : 'hidden'}
-                w="100%"
-                transition="visibility 250ms"
-              >
-                <Text marginRight="auto">Bulk Generate</Text>
-                <NumberInput
-                  size="sm"
-                  defaultValue={0}
-                  min={1}
-                  max={500}
-                  maxW={16}
-                  value={bulkUUIDsCount}
-                  onChange={onBulkCountChange}
-                >
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-              </Flex>
-              <Button
-                onClick={onGenerateUUID}
-                mt="auto"
-                w="100%"
-                variant="outline"
-                colorScheme="cyan"
-                isFullWidth
-              >
-                Generate
-              </Button>
-            </VStack>
+              {/* <Flex> */}
+              <Tabs isFitted variant="enclosed" w="100%">
+                <TabList mb="1em">
+                  <Tab>
+                    <Heading variant="gradient">Generated UUID</Heading>
+                  </Tab>
+                  <Tab>
+                    <Heading>Settings</Heading>
+                  </Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel>
+                    <Flex
+                      flexDir={['column-reverse', 'column-reverse', 'row', 'row']}
+                      alignItems={['center', 'center', 'flex-start', 'flex-start']}
+                      justifyContent="space-between"
+                    >
+                      {/* <Flex> */}
+                      {renderBulkUUID()}
+                      <Stack
+                        spacing="2"
+                        direction={['row', 'row', 'column', 'column']}
+                        w={['100%', '100%', 'initial', 'initial']}
+                        mb={[4, 6, 0, 0]}
+                      >
+                        <Button
+                          onClick={onGenerateUUID}
+                          mt="auto"
+                          w="100%"
+                          variant="moonInvert"
+                          size={buttonSize}
+                          fontSize={['sm', 'sm', 'lg', 'lg']}
+                          colorScheme="cyan"
+                        >
+                          Generate
+                        </Button>
+                        <Button
+                          size={buttonSize}
+                          fontSize={['sm', 'sm', 'lg', 'lg']}
+                          leftIcon={<MdContentCopy />}
+                          variant="moonInvert"
+                          aria-label="copy uuid"
+                          w="100%"
+                          onClick={onCopy}
+                        >
+                          Copy to Clipboard
+                        </Button>
+                        {generateBulkUUID && (
+                          <Button
+                            leftIcon={<RiDownloadLine />}
+                            variant="moonInvert"
+                            size={buttonSize}
+                            fontSize={['sm', 'sm', 'lg', 'lg']}
+                            w="100%"
+                            aria-label="download generate uuid to a file"
+                            onClick={downloadToFile}
+                          >
+                            Download to a file
+                          </Button>
+                        )}
+                      </Stack>
+                    </Flex>
+                  </TabPanel>
+                  <TabPanel>
+                    <Stack spacing="6">
+                      <RadioGroup onChange={onUUIDVersionChange} value={value} colorScheme="cyan">
+                        <HStack display="flex" direction="row" alignItems="center" spacing="4">
+                          <Text fontSize="lg" fontWeight="semibold">
+                            Version:
+                          </Text>
+                          <Radio value="1" size="lg">
+                            v1
+                          </Radio>
+                          <Radio value="4" size="lg">
+                            v4
+                          </Radio>
+                          <Radio value="NIL_UUID" size="lg">
+                            Nil
+                          </Radio>
+                        </HStack>
+                      </RadioGroup>
+                      <FormControl display="flex" alignItems="center">
+                        <FormLabel
+                          htmlFor="email-alerts"
+                          mb="0"
+                          fontSize="lg"
+                          fontWeight="semibold"
+                        >
+                          Enable Bulk generate
+                        </FormLabel>
+                        <Switch
+                          size="lg"
+                          colorScheme="cyan"
+                          id="email-alerts"
+                          isChecked={generateBulkUUID}
+                          onChange={(e) => setGenerateBulkUUID((state) => !state)}
+                        />
+                      </FormControl>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="flex-start"
+                        visibility={generateBulkUUID ? 'visible' : 'hidden'}
+                        w="100%"
+                        transition="visibility 250ms"
+                      >
+                        <Text fontSize="lg" mr="4">
+                          Bulk Generate
+                        </Text>
+                        <NumberInput
+                          size="lg"
+                          defaultValue={0}
+                          min={1}
+                          max={500}
+                          maxW="10%"
+                          value={bulkUUIDsCount}
+                          onChange={onBulkCountChange}
+                        >
+                          <NumberInputField />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </Flex>
+                    </Stack>
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </Flex>
           </Flex>
         </Flex>
-        <Flex
-          rounded="sm"
-          w="100%"
-          p="4"
-          mt="12"
-          mb="6"
-          alignItems="center"
-          justifyContent="space-between"
-          transition="box-shadow 0.2s ease 0s"
-          boxShadow={boxShadow}
-          flexDir={['column', 'column', 'row', 'row']}
-          bg={moon}
-        >
-          <Text fontSize={['lg', 'lg', 'lg', 'xl']} mb={[4, 2, 0, 0]}>
-            Generated UUID
-          </Text>
-          <HStack spacing="4">
-            {generateBulkUUID && (
-              <Button
-                leftIcon={<RiDownloadLine />}
-                variant="outline"
-                aria-label="download generate uuid to a file"
-                onClick={downloadToFile}
-                size="md"
-              >
-                Download to a file
-              </Button>
-            )}
-            <Button
-              size="md"
-              leftIcon={<MdContentCopy />}
-              variant="outline"
-              aria-label="copy uuid"
-              onClick={onCopy}
-            >
-              Copy to Clipboard
-            </Button>
-          </HStack>
-        </Flex>
-        {renderBulkUUID()}
       </Wrapper>
     </Page>
   )
