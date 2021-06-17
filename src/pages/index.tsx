@@ -72,7 +72,7 @@ const Index = ({ topUtilities = [] }) => {
           {filteredTopUtilities.map(({ id, slug, href }, index) => (
             <Link href={href} key={id}>
               <a style={{ width: '100%' }}>
-                <Button key={slug} bg={moonInvert} size="lg" mt="1" rounded="xl">
+                <Button key={slug} bg={moonInvert} size="lg" mt="1" rounded="xl" w="100%">
                   <Text color={moon}>{sentenceCase(slug) ? sentenceCase(slug) : slug}</Text>
                 </Button>
               </a>

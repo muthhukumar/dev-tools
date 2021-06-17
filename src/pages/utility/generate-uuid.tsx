@@ -34,6 +34,7 @@ import { Page } from '../../components/Page'
 import { UtilityTitle } from '../../components/UtilityTitle'
 import { Wrapper } from '../../components/Wrapper'
 import { composeUUID, generateUUID } from '../../utils/generate-uuid'
+import { copyToClipboard } from '../../utils'
 
 const GenerateUUID = () => {
   const [value, setValue] = React.useState<string>('4')
@@ -60,7 +61,8 @@ const GenerateUUID = () => {
     try {
       const uuids = generateBulkUUID ? composeUUID(bulkUUIDs) : uuid
 
-      navigator.clipboard.writeText(uuids)
+      copyToClipboard(uuids)
+
       toast({
         title: 'Copied!',
         status: 'success',
