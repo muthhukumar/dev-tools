@@ -11,7 +11,7 @@ import { Images } from '../../components/Images'
 import { useInfiniteImage, PAGE_SIZE } from '../../utils/hooks/useInfiniteImage'
 
 const RandomImageGenerator = () => {
-  const [query, setQuery] = React.useState<string>('nature')
+  const [query, setQuery] = React.useState<string>('')
 
   const {
     images,
