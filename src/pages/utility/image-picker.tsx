@@ -9,9 +9,11 @@ import { Wrapper } from '../../components/Wrapper'
 import { GradientWrapper } from '../../components/GradientWrapper'
 import { Images } from '../../components/Images'
 import { useInfiniteImage, PAGE_SIZE } from '../../utils/hooks/useInfiniteImage'
+import { useColor } from '../../utils/hooks/useColor'
 
 const RandomImageGenerator = () => {
   const [query, setQuery] = React.useState<string>('')
+  const { moon } = useColor()
 
   const {
     images,
@@ -63,6 +65,7 @@ const RandomImageGenerator = () => {
                 px="4"
                 background={'black'}
                 rounded="xl"
+                bg={moon}
                 alignItems="center"
               >
                 <Input
