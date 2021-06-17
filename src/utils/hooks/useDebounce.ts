@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from 'react'
 
-export function useDebounce(value: any, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState(null)
+export function useDebounce<ValueType>(value: ValueType, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState<null | typeof value>(null)
 
-  const previousValueRef = useRef()
+  const previousValueRef = useRef<ValueType | undefined>()
 
   useEffect(() => {
     if (value !== previousValueRef.current) {

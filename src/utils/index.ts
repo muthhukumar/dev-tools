@@ -7,3 +7,5 @@ export function getFilteredData<DataType>(
     ? data.filter((entry) => String(entry[field]).toLowerCase().includes(queryTerm.toLowerCase()))
     : data
 }
+
+export const copyToClipboard = (data) => navigator.clipboard.writeText(data)
