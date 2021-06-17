@@ -19,6 +19,7 @@
     "@fontsource/raleway": "^4.4.5",
     "@fontsource/roboto-mono": "^4.4.5",
     "babel-plugin-inline-react-svg": "^2.0.1",
+    "change-case": "^4.1.2",
     "framer-motion": "^4.0.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
@@ -30,6 +31,7 @@
     "react-hook-form": "^7.7.1",
     "react-icons": "^4.2.0",
     "react-spinners": "^0.11.0",
+    "swr": "^0.5.6",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

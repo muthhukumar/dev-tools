@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Heading, Grid, chakra, Container, Text, Flex, Input, Button } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
 import { NextSeo } from 'next-seo'
+import { sentenceCase } from 'change-case'
 
 import { Page } from '../components/Page'
 import { getUtilitySlugs } from '../utils/files'
@@ -72,7 +73,7 @@ const Index = ({ topUtilities = [] }) => {
             <Link href={href} key={id}>
               <a style={{ width: '100%' }}>
                 <Button key={slug} bg={moonInvert} size="lg" mt="1" rounded="xl">
-                  <Text color={moon}>{slug}</Text>
+                  <Text color={moon}>{sentenceCase(slug) ? sentenceCase(slug) : slug}</Text>
                 </Button>
               </a>
             </Link>
