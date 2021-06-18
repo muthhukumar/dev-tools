@@ -41,7 +41,7 @@ const StringToJavascriptArray = () => {
       const result = splitResult.map((entry) => {
         if (wrapQuote) {
           console.log(entry, !isNaN(+entry) && keepNumber)
-          if (entry !== ''&& !isNaN(+entry) && keepNumber) {
+          if (entry !== '' && !isNaN(+entry) && keepNumber) {
             return entry
           }
           return `'${entry}'`
@@ -59,14 +59,17 @@ const StringToJavascriptArray = () => {
     } catch {}
   }
   const copyOnFocus = () => {
-    copyToClipboard(outputTextareaRef.current.value, () => {
-      toast({
-        title: 'Copied!',
-        status: 'success',
-        duration: 2000,
-        position: 'top-right',
+    const content = outputTextareaRef.current.value
+    if (content) {
+      copyToClipboard(outputTextareaRef.current.value, () => {
+        toast({
+          title: 'Copied!',
+          status: 'success',
+          duration: 2000,
+          position: 'top-right',
+        })
       })
-    })
+    }
   }
   return (
     <Page>
