@@ -8,4 +8,9 @@ export function getFilteredData<DataType>(
     : data
 }
 
-export const copyToClipboard = (data) => navigator.clipboard.writeText(data)
+export const copyToClipboard = (data, successCallback?: (any) => void) => {
+  try {
+    navigator.clipboard.writeText(data)
+    successCallback(data)
+  } catch {}
+}

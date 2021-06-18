@@ -256,7 +256,7 @@ const GenerateUUID = () => {
                           colorScheme="cyan"
                           id="email-alerts"
                           isChecked={generateBulkUUID}
-                          onChange={(e) => setGenerateBulkUUID((state) => !state)}
+                          onChange={() => setGenerateBulkUUID((state) => !state)}
                         />
                       </FormControl>
                       <Flex
