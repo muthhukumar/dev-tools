@@ -19,8 +19,8 @@ export const Images = ({ largeImageURL, imageHeight, imageWidth, onDownload }) =
           icon={<HiDownload size={25} />}
           onClick={onDownload.bind(null, largeImageURL)}
           size={buttonSize}
-          background="transparent"
-          color="whiteAlpha.100"
+          color="whiteAlpha.500"
+          variant="ghost"
           _hover={{ color: 'whiteAlpha.900' }}
         />
         <IconButton
@@ -36,8 +36,8 @@ export const Images = ({ largeImageURL, imageHeight, imageWidth, onDownload }) =
               position: 'top-right',
             })
           }}
-          background="transparent"
-          color="whiteAlpha.100"
+          color="whiteAlpha.500"
+          variant="ghost"
           _hover={{ color: 'whiteAlpha.900' }}
         />
       </HStack>
