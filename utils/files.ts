@@ -19,7 +19,7 @@ export function getUtilitySlugs(): Array<Utility> {
 }
 
 // POSTS_PATH is useful when you want to get the path to a specific file
-export const SNIPPETS_PATH = path.join(process.cwd(), 'posts')
+export const SNIPPETS_PATH = path.join(process.cwd(), 'snippets')
 
 // postFilePaths is the list of all mdx files inside the SNIPPETS_PATH directory
 export const snippetFilePaths = fs
