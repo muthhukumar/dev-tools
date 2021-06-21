@@ -11,7 +11,7 @@
     "test": "jest",
     "test-all": "yarn lint && yarn type-check && yarn test",
     "prepare": "husky install",
-    "dev:watch": "next-remote-watch ./posts"
+    "dev:watch": "next-remote-watch ./snippets"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.5",
