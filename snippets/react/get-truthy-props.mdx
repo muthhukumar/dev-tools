@@ -1,0 +1,45 @@
+---
+title: Get Truthy props
+description: This function return given props or empty object based on the expect and current value passed
+---
+
+```ts
+function getTruthyProps<PropsType>(
+  expect: string | number,
+  current: string | number,
+  props: PropsType,
+): Record<string, unknown> | typeof props {
+  return expect === current ? props : {}
+}
+```
+
+This function accepts expect, current and props as parameter. And it will check whether the expected
+value and the current value is equal. If those values are equal then it will return the given props
+otherwise it will return an empty object
+
+## How to use
+
+```jsx
+<Text
+  px="4"
+  transition="all 100ms ease-out"
+  isTruncated
+  {...(getTruthyProps <
+    TextProps >
+    (actualCategory,
+    category,
+    {
+      p: 2,
+      rounded: 'md',
+      minW: '98%',
+      borderWidth: '1px',
+      transition: 'all 150ms ease-in',
+      ml: 'auto',
+    }))}
+>
+  {sentenceCase(_.capitalize(category))}
+</Text>
+```
+
+Here the properties send to the getTruthyProps only get returned when the current and the exact value
+is equal. In this case, the actualCategory should be equal to category.

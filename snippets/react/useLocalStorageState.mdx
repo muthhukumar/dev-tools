@@ -1,0 +1,51 @@
+---
+title: useLocalStoreState custom hook
+description: Use the state value and updates the value in the local storage
+---
+
+```js
+import * as React from 'react'
+
+function useLocalStorageState(
+  key,
+  defaultValue = '',
+  { serialize = JSON.stringify, deserialize = JSON.parse } = {},
+) {
+  const [state, setState] = React.useState(() => {
+    const valueInLocalStorage = window.localStorage.getItem(key)
+    if (valueInLocalStorage) {
+      // the try/catch is here in case the localStorage value was set before
+      // we had the serialization in place
+      try {
+        return deserialize(valueInLocalStorage)
+      } catch (error) {
+        window.localStorage.removeItem(key)
+      }
+    }
+    return typeof defaultValue === 'function' ? defaultValue() : defaultValue
+  })
+
+  const prevKeyRef = React.useRef(key)
+
+  React.useEffect(() => {
+    const prevKey = prevKeyRef.current
+    if (prevKey !== key) {
+      window.localStorage.removeItem(prevKey)
+    }
+    prevKeyRef.current = key
+    window.localStorage.setItem(key, serialize(state))
+  }, [key, state, serialize])
+
+  const removeItem = () => {
+    try {
+      localStorage.removeItem(key)
+    } catch (error) {}
+  }
+
+  return [state, setState]
+}
+```
+
+This hook is used to save the state value to the local storage. When mount the initial value of the
+state is initialized from the local storage. And whenever the value of the state changes, the hook
+will update that value in the local storage
