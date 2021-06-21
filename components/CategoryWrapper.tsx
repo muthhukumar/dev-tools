@@ -16,6 +16,8 @@ import {
 import { FiSearch } from 'react-icons/fi'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import _ from 'lodash'
+import { sentenceCase } from 'change-case'
+import { NextSeo } from 'next-seo'
 
 type Props = {
   categories: Array<string>
@@ -26,11 +28,11 @@ type Props = {
   showSnippets?: boolean
 }
 
-const getActiveProps = (
+function getTruthyProps<PropsType>(
   expect: string | number,
   current: string | number,
-  props: TextProps,
-): Record<string, unknown> | typeof props => {
+  props: PropsType,
+): Record<string, unknown> | typeof props {
   return expect === current ? props : {}
 }
 
@@ -48,17 +50,17 @@ export const CategoryWrapper: React.FC<Props> = ({
   const renderSnippets = () => {
     if (snippetsData && snippetsData.length > 0) {
       return (
-        <VStack pl="6" alignItems="flex-start" spacing="3" h="100%" minW="72">
+        <VStack pl="6" alignItems="flex-start" spacing="3" h="100%" minW="72" mr="2">
           {snippetsData.map((snippet) => (
             <Link
               href={`/snippets/${actualCategory}/${snippet.slug.replace(/\.mdx?$/, '')}`}
               key={snippet.slug}
             >
-              <a>
+              <a style={{ width: '100%' }}>
                 <Text
                   transition="all 100ms ease-out"
                   isTruncated
-                  {...getActiveProps(slug, snippet.slug.replace(/\.mdx?$/, ''), {
+                  {...getTruthyProps<TextProps>(slug, snippet.slug.replace(/\.mdx?$/, ''), {
                     p: 2,
                     rounded: 'md',
                     minW: '100%',
@@ -84,6 +86,9 @@ export const CategoryWrapper: React.FC<Props> = ({
   }
   return (
     <Container minH="100vh" maxW="100%" py="6">
+      <NextSeo
+        title={`Snippets ${actualCategory && ' - ' + actualCategory} ${slug && ' - ' + slug}`}
+      />
       <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />} mb="6">
         <BreadcrumbItem>
           <BreadcrumbLink href="/snippets" as={Link}>
@@ -97,7 +102,7 @@ export const CategoryWrapper: React.FC<Props> = ({
           <BreadcrumbItem>
             <BreadcrumbLink href={`/snippets/${actualCategory}`} as={Link}>
               <a>
-                <Text fontSize="xl">{_.capitalize(actualCategory)}</Text>
+                <Text fontSize="xl">{sentenceCase(_.capitalize(actualCategory))}</Text>
               </a>
             </BreadcrumbLink>
           </BreadcrumbItem>
@@ -139,7 +144,7 @@ export const CategoryWrapper: React.FC<Props> = ({
                   px="4"
                   transition="all 100ms ease-out"
                   isTruncated
-                  {...getActiveProps(actualCategory, category, {
+                  {...getTruthyProps<TextProps>(actualCategory, category, {
                     p: 2,
                     rounded: 'md',
                     minW: '98%',
@@ -148,7 +153,7 @@ export const CategoryWrapper: React.FC<Props> = ({
                     ml: 'auto',
                   })}
                 >
-                  {_.capitalize(category)}
+                  {sentenceCase(_.capitalize(category))}
                 </Text>
               </a>
             </Link>

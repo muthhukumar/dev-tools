@@ -67,6 +67,10 @@ const theme = extendTheme({
         width: '100%',
         fontFamily: 'League Mono',
       },
+      code: {
+        overflowX: 'scroll',
+        padding: '12px',
+      },
     }),
   },
   colors: {
