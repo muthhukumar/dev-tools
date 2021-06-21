@@ -19,6 +19,7 @@
     "@chakra-ui/theme-tools": "1.1.7",
     "@emotion/react": "11.4.0",
     "@emotion/styled": "11.3.0",
+    "@fontsource/league-mono": "^4.4.5",
     "@fontsource/open-sans": "^4.4.5",
     "@fontsource/raleway": "^4.4.5",
     "@fontsource/roboto-mono": "^4.4.5",

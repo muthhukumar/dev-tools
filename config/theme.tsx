@@ -63,6 +63,10 @@ const theme = extendTheme({
         )(props),
         backgroundSize: '22px 22px',
       },
+      pre: {
+        width: '100%',
+        fontFamily: 'League Mono',
+      },
     }),
   },
   colors: {

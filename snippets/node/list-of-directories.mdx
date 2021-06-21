@@ -1,0 +1,13 @@
+---
+title: List of directories in a path
+description: This function takes a path return list of directory names in that path
+---
+
+```js
+export const getDirectories = (source: string): Array<string> => {
+  return fs
+    .readdirSync(source, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((directory) => directory.name)
+}
+```

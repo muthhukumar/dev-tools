@@ -1060,6 +1060,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/league-mono@^4.4.5":
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/league-mono/-/league-mono-4.4.5.tgz#467ebe57ee9851f7c1a5932a69f46aae38ac007d"
+  integrity sha512-eeRviMauLG2H36cv3cocsSLZR8uTA6BGMUMZnkm8Zg9UqHr5/6/btt3qexa8tGVgdlcBGy7To0CNaQT6nd81BQ==
+
 "@fontsource/open-sans@^4.4.5":
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/@fontsource/open-sans/-/open-sans-4.4.5.tgz#07b31617e62ed753c94cabcf552ebaed4de497ce"
