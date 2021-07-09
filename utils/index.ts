@@ -1,5 +1,5 @@
 export function getFilteredData<DataType>(
-  data: Array<DataType>,
+  data: Array<DataType> = [],
   queryTerm: string,
   field: keyof DataType,
 ): Array<DataType> {

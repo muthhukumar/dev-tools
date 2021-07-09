@@ -9,6 +9,7 @@ export const generateUUID = (version: '4' | '1' | 'NIL_UUID' = '4'): string => {
   return uuidGenerator[version]()
 }
 
-export const composeUUID = (uuids: Array<string>): string => {
+export const composeUUID = (uuids: Array<string> | null = []): string => {
+  if (!uuids) return ''
   return uuids.join('\n')
 }
