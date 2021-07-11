@@ -1,7 +1,37 @@
-# Example app with [chakra-ui](https://github.com/chakra-ui/chakra-ui) and Typescript
 
-This example features how to use [chakra-ui](https://github.com/chakra-ui/chakra-ui) as the component library within a Next.js app with typescript.
+# List of utility tools
 
-Next.js and chakra-ui have built-in TypeScript declarations, so we'll get autocompletion for their modules straight away.
+A list of utility tools I created.
 
-We are connecting the Next.js `_app.js` with `chakra-ui`'s Provider and theme so the pages can have app-wide dark/light mode. We are also creating some components which shows the usage of `chakra-ui`'s style props.
+
+## Installation
+
+```bash
+  git clone https://github.com/muthhukumar/dev-tools.git
+  cd dev-tools
+  npm install
+```
+    
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
+
+To run test in watch mode, run the following command
+
+```bash
+  npm run test-watch
+```
+## Authors
+
+- [Muthukumar](https://www.github.com/muthhukumar)
+
+  
+## License
+
+[MIT](https://github.com/muthhukumar/dev-tools/blob/main/LICENSE)
+
+  
