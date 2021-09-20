@@ -1,5 +1,6 @@
 import '@fontsource/roboto-mono/400.css'
 import '@fontsource/open-sans/700.css'
+import '@fontsource/league-mono'
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'

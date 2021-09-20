@@ -1,3 +1,9 @@
+---
+title: useDebounce custom hook
+description: Debounce the given value with the given delay
+---
+
+```ts
 import { useRef, useState, useEffect } from 'react'
 
 export function useDebounce<ValueType>(value: ValueType, delay: number): ValueType | null {
@@ -25,3 +31,7 @@ export function useDebounce<ValueType>(value: ValueType, delay: number): ValueTy
 
   return debouncedValue
 }
+```
+
+This hook accept value and a delay as the parameter. When the value parameter is changed then this
+hook will return the debounce value as null and after the given delay, it will return the given value.

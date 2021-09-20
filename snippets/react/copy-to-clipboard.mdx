@@ -1,0 +1,18 @@
+---
+title: Copy to Clipboard in React
+description: This function is used to copy the text to the Clipboard
+---
+
+```ts
+export const copyToClipboard = (data: string, successCallback?: (data: any) => void): void => {
+  try {
+    navigator.clipboard.writeText(data)
+    if (successCallback) successCallback(data)
+  } catch {
+    return
+  }
+}
+```
+
+This function will get the text and will copy it to the clipboard. Once the copy is done, if the
+callback is provided then will the call the callback with the data.

@@ -63,6 +63,14 @@ const theme = extendTheme({
         )(props),
         backgroundSize: '22px 22px',
       },
+      pre: {
+        width: '100%',
+        fontFamily: 'League Mono',
+      },
+      code: {
+        overflowX: 'scroll',
+        padding: '12px',
+      },
     }),
   },
   colors: {
